@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dein Einstieg in die Börse – mit TobiInvest</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #1A237E;
+      --secondary: #0D47A1;
+      --accent: #64B5F6;
+      --light: #E3F2FD;
+      --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      --popular-badge: #FFC107;
+      /* Gelb für das "Beliebtestes Paket" Badge */
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #2d3436;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.97);
+      /* Leicht transparenter */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      /* Dezenterer Schatten */
+      padding: 1rem 0;
+      transition: all 0.3s ease-in-out;
+      /* Sanftere Transition */
+    }
+
+    .navbar-scrolled {
+      background: rgba(255, 255, 255, 0.99);
+      padding: 0.75rem 0;
+      /* Etwas weniger Padding beim Scrollen */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--primary) !important;
+      font-size: 1.75rem;
+      /* Etwas größer */
+      letter-spacing: -0.02em;
+    }
+
+    .nav-link {
+      color: var(--primary) !important;
+      font-weight: 500;
+      margin: 0 0.8rem;
+      /* Weniger horizontaler Abstand */
+      padding: 0.5rem 0;
+      /* Vertikales Padding */
+      position: relative;
+      font-size: 1rem;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      /* Startet in der Mitte */
+      background-color: var(--accent);
+      transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+      /* Sanftere Transition */
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      /* Füge eine Klasse 'active' für die aktuelle Seite hinzu, falls benötigt */
+      width: 100%;
+      left: 0;
+      /* Endet am linken Rand */
+    }
+
+    .hero {
+      background: var(--gradient);
+      padding: 10rem 1rem 8rem;
+      /* Mehr vertikales Padding */
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 0 12px 12px;
+      /* Abgerundete untere Ecken */
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      opacity: 0.1;
+      /* Noch dezenter */
+      animation: subtlePan 60s linear infinite;
+      /* Langsamere Animation */
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .display-4 {
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.75rem;
+      /* Mehr Abstand */
+      animation: fadeInUp 1.2s ease-out;
+      /* Sanftere Animation */
+      font-size: 3rem;
+      /* Größere Schrift */
+    }
+
+    .lead-hero {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.85);
+      /* Weniger opak */
+      margin-bottom: 2.25rem;
+      /* Mehr Abstand */
+    }
+
+    .cta-button {
+      background: white;
+      color: var(--primary);
+      border: none;
+      padding: 1.1rem 2.75rem;
+      /* Größeres Padding */
+      font-size: 1.15rem;
+      /* Größere Schrift */
+      border-radius: 50px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      /* Schnellere Transition */
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      /* Intensiverer Schatten */
+      text-decoration: none !important;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-4px);
+      /* Stärkere Anhebung */
+      box-shadow: 0 12px 24px rgba(26, 35, 126, 0.25);
+      /* Intensiverer Schatten */
+    }
+
+    section {
+      padding: 7rem 1rem;
+      /* Mehr Padding */
+    }
+
+    .price-table,
+    .annual-price-table {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2.5rem;
+      /* Mehr Abstand */
+      margin-top: 3.5rem;
+      /* Mehr Abstand */
+    }
+
+    .price-box,
+    .annual-price-box {
+      background-color: #ffffff;
+      /* Weißer Hintergrund */
+      border-radius: 12px;
+      padding: 2.5rem;
+      /* Mehr Padding */
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+      /* Dezenterer Schatten */
+      width: 100%;
+      max-width: 320px;
+      /* Etwas breiter */
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      /* Schnellere Transition */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .price-box:hover,
+    .annual-price-box:hover {
+      transform: translateY(-6px);
+      /* Stärkere Anhebung */
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+      /* Intensiverer Schatten */
+    }
+
+    .price-box.popular,
+    .annual-price-box.popular-annual {
+      transform: scale(1.06);
+      /* Stärkere Hervorhebung */
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+      /* Intensiverer Schatten */
+      background-color: var(--light);
+      position: relative;
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -12px;
+      /* Mehr Abstand nach oben */
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--popular-badge);
+      color: white;
+      padding: 0.6rem 1.2rem;
+      /* Größeres Padding */
+      border-radius: 6px;
+      /* Mehr Rundung */
+      font-size: 0.95rem;
+      /* Etwas größer */
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .price {
+      font-size: 2.25rem;
+      /* Größere Schrift */
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 0.75rem;
+      /* Mehr Abstand */
+    }
+
+    .package-name {
+      font-size: 1.3rem;
+      /* Größere Schrift */
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      /* Mehr Abstand */
+      color: var(--primary);
+      letter-spacing: -0.01em;
+    }
+
+    .features,
+    .annual-features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 2rem;
+      /* Mehr Abstand */
+    }
+
+    .features li,
+    .annual-features li {
+      margin-bottom: 0.8rem;
+      /* Mehr Abstand */
+      color: #495057;
+      font-size: 1rem;
+    }
+
+    .features li strong,
+    .annual-features li strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .price .package-name,
+    .features,
+    .annual-price .annual-package-name,
+    .annual-features {
+      margin-bottom: auto;
+    }
+
+    .price-cta,
+    .annual-price-cta {
+      background: var(--gradient);
+      color: white;
+      border: none;
+      padding: 1rem 2.25rem;
+      /* Angepasstes Padding */
+      border-radius: 50px;
+      text-decoration: none !important;
+      font-weight: 600;
+      /* Etwas fetter */
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+      /* Transition für Hintergrund */
+      display: inline-flex;
+      /* Für bessere vertikale Zentrierung */
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      /* Angepasste Mindesthöhe */
+      font-size: 1.1rem;
+    }
+
+    .price-cta:hover,
+    .annual-price-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+      background: var(--secondary);
+    }
+
+    .testimonial {
+      background-color: var(--light);
+      padding: 3.5rem 1.5rem;
+      /* Mehr Padding */
+      border-radius: 12px;
+      margin-top: 4rem;
+      /* Mehr Abstand */
+      text-align: center;
+      font-style: italic;
+      color: #6c757d;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .testimonial strong {
+      display: block;
+      color: var(--primary);
+      font-style: normal;
+      margin-top: 1.25rem;
+      /* Mehr Abstand */
+      font-weight: 600;
+    }
+
+    .why-i-do-this {
+      margin-top: 5rem;
+      /* Mehr Abstand */
+    }
+
+    .faq-list {
+      margin-top: 2.5rem;
+      /* Mehr Abstand */
+    }
+
+    .faq-item {
+      margin-bottom: 2rem;
+      /* Mehr Abstand */
+      border-bottom: 1px solid #dee2e6;
+      padding-bottom: 2rem;
+      /* Mehr Padding */
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 0.75rem;
+      /* Mehr Abstand */
+      font-size: 1.15rem;
+    }
+
+    .faq-answer {
+      color: #495057;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .rounded-image {
+      border-radius: 1rem;
+      width: 100%;
+      max-width: 550px;
+      /* Etwas breiter */
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      /* Intensiverer Schatten */
+    }
+
+    .annual-offer {
+      margin-top: 5rem;
+      /* Mehr Abstand */
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+      /* Mehr Padding */
+      background-color: #f8f9fa;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+      /* Dezenterer Schatten */
+    }
+
+    .annual-offer h2 {
+      color: var(--primary);
+      margin-bottom: 1.75rem;
+      /* Mehr Abstand */
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .annual-price {
+      font-size: 2.75rem;
+      /* Größere Schrift */
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 0.6rem;
+      /* Weniger Abstand */
+    }
+
+    .annual-price .monthly {
+      font-size: 1.05rem;
+      /* Etwas größer */
+      color: #6c757d;
+    }
+
+    .annual-package-name {
+      font-size: 1.4rem;
+      /* Größere Schrift */
+      font-weight: 600;
+      margin-bottom: 1.1rem;
+      /* Weniger Abstand */
+      color: var(--primary);
+      letter-spacing: -0.01em;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      padding: 3.5rem 1rem;
+      /* Mehr Padding */
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    footer p {
+      margin-bottom: 0;
+    }
+
+    @keyframes subtlePan {
+      0% {
+        transform: translateX(-3%) scale(1.03);
+      }
+
+      50% {
+        transform: translateX(3%) scale(1.03);
+      }
+
+      100% {
+        transform: translateX(-3%) scale(1.03);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    [data-aos] {
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+      /* Schnellere Animation */
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">TobiInvest</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#about">Meine Idee</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#packages">Pakete</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#annual">Jahresabo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#why">Warum ich das mache</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#faq">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Kontakt</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content container text-center">
+      <h1 class="display-4 text-white mb-4">Dein Einstieg in die Börse – mit echtem Wissen, ohne Aufwand.</h1>
+      <p class="lead-hero text-white mb-4" data-aos="fade-up" data-aos-delay="200">Lass dir exklusiv Aktien-Ideen
+        liefern, analysiert & verständlich. Für Einsteiger, von einem, der’s ernst meint.</p>
+      <a href="#packages" class="cta-button">Jetzt Paket wählen</a>
+    </div>
+  </header>
+
+  <section id="packages">
+    <div class="container text-center">
+      <h2 class="mb-5">Wähle dein passendes Monats-Paket</h2>
+      <div class="price-table">
+        <div class="price-box">
+          <h3 class="package-name">BASIC</h3>
+          <p class="price">14,90 €</p>
+          <ul class="features">
+            <li><strong>2–3</strong> Aktien-Picks pro Monat</li>
+            <li>Benachrichtigungen <strong>nur bei größeren Marktbewegungen</strong></li>
+            <li>Grundlegende Analysen</li>
+            <li>Support <strong>per E-Mail</strong></li>
+          </ul>
+          <a href="#" class="price-cta">Jetzt wählen</a>
+        </div>
+
+        <div class="price-box popular">
+          <div class="popular-badge">Beliebtestes Paket</div>
+          <h3 class="package-name">PLUS</h3>
+          <p class="price">24,90 €</p>
+          <ul class="features">
+            <li><strong>2–3 + wöchentliche Markt-Updates</strong></li>
+            <li>Benachrichtigungen <strong>bei wichtigen Ereignissen</strong></li>
+            <li>Detaillierte Aktien-Analysen</li>
+            <li><strong>Marktüberblick & persönliche Einschätzung</strong></li>
+            <li>Support <strong>mit schnellerer Antwortzeit</strong></li>
+          </ul>
+          <a href="#" class="price-cta">Jetzt starten</a>
+        </div>
+
+        <div class="price-box">
+          <h3 class="package-name">PREMIUM</h3>
+          <p class="price">39,90 €</p>
+          <ul class="features">
+            <li><strong>2–3 + individuelle Wunsch-Analysen</strong></li>
+            <li><strong>Direkte Benachrichtigungen nach deinen Präferenzen</strong></li>
+            <li>Umfassende Aktien- und Marktanalysen</li>
+            <li><strong>Persönliche Strategie-Gespräche (1x pro Monat)</strong></li>
+            <li><strong>Priorisierter Support per Direktnachricht</strong></li>
+          </ul>
+          <a href="#" class="price-cta">Exklusiv sichern</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="annual">
+    <div class="container annual-offer">
+      <h2 class="mb-4">Spare mit unseren Jahresabos!</h2>
+      <p class="lead">Profitiere von unseren vergünstigten Jahresangeboten und sichere dir langfristig dein
+        Börsenwissen.</p>
+      <div class="annual-price-table">
+        <div class="annual-price-box">
+          <h3 class="annual-package-name">BASIC JAHRESABO</h3>
+          <p class="annual-price">149 € <span class="monthly">(entspricht 12,42 €/Monat)</span></p>
+          <ul class="annual-features">
+            <li>Alle Vorteile des BASIC Monats-Pakets</li>
+            <li><strong>Spare über 15% im Vergleich zum Monatsabo</strong></li>
+          </ul>
+          <a href="#" class="annual-price-cta">Jetzt Jahresabo wählen</a>
+        </div>
+
+        <div class="annual-price-box popular-annual">
+          <div class="popular-badge">Unser Tipp!</div>
+          <h3 class="annual-package-name">PLUS JAHRESABO</h3>
+          <p class="annual-price">249 € <span class="monthly">(entspricht 20,75 €/Monat)</span></p>
+          <ul class="annual-features">
+            <li>Alle Vorteile des PLUS Monats-Pakets</li>
+            <li><strong>Spare fast 17% im Vergleich zum Monatsabo</strong></li>
+            <li><strong>Zusätzlich: Ein exklusives Q&A pro Quartal</strong></li>
+          </ul>
+          <a href="#" class="annual-price-cta">Jetzt Jahresabo starten</a>
+        </div>
+
+        <div class="annual-price-box">
+          <h3 class="annual-package-name">PREMIUM JAHRESABO</h3>
+          <p class="annual-price">399 € <span class="monthly">(entspricht 33,25 €/Monat)</span></p>
+          <ul class="annual-features">
+            <li>Alle Vorteile des PREMIUM Monats-Pakets</li>
+            <li><strong>Spare über 16% im Vergleich zum Monatsabo</strong></li>
+            <li><strong>Zusätzlich: Zwei exklusive Einzelcoachings pro Jahr</strong></li>
+          </ul>
+          <a href="#" class="annual-price-cta">Exklusives Jahresabo sichern</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h2 class="mb-4">Warum ich das mache</h2>
+          <p class="lead">Hi, ich bin Tobi – selbst noch Schüler (17 Jahre) – und meine Begeisterung für die Börse hat
+            früh begonnen.</p>
+          <p>Ich kenne das Gefühl der Überforderung beim Start. Kaum glaubt man, ein vielversprechendes Wertpapier
+            entdeckt zu haben, verunsichern einen schon die nächste Meinung von YouTubern, Ratgebern oder Freunden.
+            Genau deshalb möchte ich mein Wissen und meine Erfahrungen mit dir teilen – auf eine verständliche Weise,
+            die dir wirklich hilft, deine ersten Schritte in der Börsenwelt entspannt zu gehen.</p>
+          <p>Meine Überzeugung ist: Mit den richtigen Informationen und etwas Unterstützung kann jeder von der Börse
+            profitieren. Und genau das möchte ich dir ermöglichen.</p>
+        </div>
+        <div class="col-lg-6 text-center" data-aos="fade-left">
+          <img src="tobi_personal.jpg" alt="Tobi persönlich" class="img-fluid rounded shadow rounded-image">
+          <small class="text-muted mt-2">Dein Guide in die Welt der Aktien</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <h2 class="mb-5 text-center">Häufig gestellte Fragen</h2>
+      <div class="faq-list">
+        <div class="faq-item" data-aos="fade-up">
+          <h4 class="faq-question">Was, wenn der Markt crasht?</h4>
+          <p class="faq-answer">Auch wenn ich sorgfältig auswähle, gibt es keine Garantie vor Marktschwankungen.
+            Ich gebe dir aber klare Infos und Strategien, wie du in solchen Situationen reagieren kannst –
+            damit du nicht in Panik verkaufst.</p>
+        </div>
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+          <h4 class="faq-question">Muss ich das alles verstehen?</h4>
+          <p class="faq-answer">Nein, musst du nicht. Ich erkläre dir alles so einfach wie möglich, ohne Fachchinesisch.
+            Mein Ziel ist,
+            dass du dich wohlfühlst und verstehst, was passiert – aber du kannst mir da voll vertrauen.</p>
+        </div>
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+          <h4 class="faq-question">Was passiert mit meinem Geld?</h4>
+          <p class="faq-answer">Dein Geld bleibt immer in deinem Namen auf deinem eigenen Konto bei deinem
+            Broker. Ich habe keinen direkten Zugriff darauf. Ich gebe dir lediglich Empfehlungen und zeige dir,
+            welche Aktien ich für vielversprechend halte.</p>
+        </div>
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+          <h4 class="faq-question">Gibt es eine Geld-zurück-Garantie?</h4>
+          <p class="faq-answer">Ich bin von meinen Analysen überzeugt und möchte, dass du zufrieden bist. Wenn
+            du innerhalb von 7 Tagen merkst, dass es nichts für dich ist, lass es mich wissen und du bekommst
+            dein Geld zurück.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container text-center">
+      <h2 class="mb-4">Neugierig geworden? Schreib mir!</h2>
+      <p>Wenn du mehr erfahren möchtest oder einfach eine Frage hast – melde dich ganz unkompliziert bei mir.</p>
+      <p><strong>WhatsApp, Instagram oder per E-Mail – du entscheidest, wie es dir am liebsten ist.</strong></p>
+      <p><a href="mailto:deine.email@adresse.de" class="btn btn-outline-primary rounded-pill px-4 py-2 mt-3">E-Mail
+          senden</a></p>
+      <p><a href="https://wa.me/deineWhatsAppNummer" target="_blank"
+          class="btn btn-success rounded-pill px-4 py-2 mt-2">WhatsApp</a></p>
+      <p><a href="https://instagram.com/deinInstagramName" target="_blank"
+          class="btn btn-info rounded-pill px-4 py-2 mt-2">Instagram</a></p>
+    </div>
+  </section>
+
+  <footer class="text-center">
+    <p>&copy; 2025 TobiInvest – Dein Partner für den entspannten Börsenstart</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    // Navbar Scroll Transition
+    window.addEventListener('scroll', function () {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('navbar-scrolled');
+      } else {
+        navbar.classList.remove('navbar-scrolled');
+      }
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
